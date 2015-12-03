@@ -6,6 +6,34 @@ require 'cnab150/errors'
 
 # The public interface of gem
 module Cnab150
+
+  def self.registries(registries)
+    file = Array.new
+    # file << mount_header
+
+    registries.each do |registry|
+      line = String.new
+      type = registry[:registry_code]
+      mapping = Cnab150::Layout.const_get(type.upcase).mapping
+
+      registry.each do |key, value|
+        line += value.is_a?(Numeric) ? value.to_s.rjust(mapping[key], '0') : value.ljust(mapping[key], ' ')
+      end
+
+      file << line
+    end
+    # file << mount_trailer
+    file
+  end
+
+  def self.mount_header
+
+  end
+
+  def self.mount_trailer
+
+  end
+
   def self.parse_registries(registries)
     registries.each_with_object([]) do |r, a|
       a << parse_registry(r)
@@ -41,4 +69,13 @@ module Cnab150
   def self.find(registries, type)
     registries.find { |r| r.registry_code.eql?(type) }
   end
+
+  def self.save_to_file(filename, registries)
+    File.open(filename, 'w'){|f| f.write(string(registries))}
+  end
+
+  def self.string(registries)
+    registries.join("\r\n") << "\r\n"
+  end
+
 end
