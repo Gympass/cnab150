@@ -9,7 +9,6 @@ module Cnab150
 
   def self.registries(registries)
     file = Array.new
-    # file << mount_header
 
     registries.each do |registry|
       line = String.new
@@ -22,16 +21,7 @@ module Cnab150
 
       file << line
     end
-    # file << mount_trailer
     file
-  end
-
-  def self.mount_header
-
-  end
-
-  def self.mount_trailer
-
   end
 
   def self.parse_registries(registries)
