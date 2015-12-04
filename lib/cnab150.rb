@@ -16,7 +16,8 @@ module Cnab150
       mapping = Cnab150::Layout.const_get(type.upcase).mapping
 
       registry.each do |key, value|
-        line += value.is_a?(Numeric) ? value.to_s.rjust(mapping[key], '0') : value.ljust(mapping[key], ' ')
+        value_to_complete = value.is_a?(Numeric) ? '0' : ' '
+        line += value.to_s[0..(mapping[key]-1)].rjust(mapping[key], value_to_complete)
       end
 
       file << line

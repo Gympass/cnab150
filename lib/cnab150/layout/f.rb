@@ -1,8 +1,8 @@
 module Cnab150
   module Layout
-    # Layout of Register E
+    # Layout of Register F
     # Return of collections identified by barcode
-    class E
+    class F
       def keys
         [ 
           :registry_code,
@@ -11,8 +11,8 @@ module Cnab150
           :bank_person_id,
           :due_date,
           :total_value,
-          :currency_code,
-          :token,
+          :return_code,
+          :company_filler,
           :filler,
           :movement_code
        ]
@@ -30,8 +30,8 @@ module Cnab150
           bank_person_id: 14,
           due_date: 8,
           total_value: 15,
-          currency_code: 2,
-          token: 60,
+          return_code: 2,
+          company_filler: 60,
           filler: 20,
           movement_code: 1
         }
