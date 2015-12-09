@@ -11,11 +11,11 @@ module Cnab150
           :organization,
           :bank_code,
           :bank_name,
-         :file_date,
-         :file_number,
-         :version,
-         :service,
-         :filler
+          :file_date,
+          :file_number,
+          :version,
+          :service,
+          :filler
        ]
       end
 

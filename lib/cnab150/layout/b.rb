@@ -8,7 +8,7 @@ module Cnab150
           :registry_code,
           :person_id,
           :agency,
-          :bank_person_id,
+          :account_number,
           :due_date,
           :filler,
           :movement_code
@@ -24,7 +24,7 @@ module Cnab150
           registry_code: 1,
           person_id: 25,
           agency: 4,
-          bank_person_id: 14,
+          account_number: 14,
           due_date: 8,
           filler: 97,
           movement_code: 1
