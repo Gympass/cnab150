@@ -12,7 +12,7 @@ module Cnab150
           :due_date,
           :total_value,
           :return_code,
-          :company_filler,
+          :token,
           :filler,
           :movement_code
        ]
@@ -31,7 +31,7 @@ module Cnab150
           due_date: 8,
           total_value: 15,
           return_code: 2,
-          company_filler: 60,
+          token: 60,
           filler: 20,
           movement_code: 1
         }
