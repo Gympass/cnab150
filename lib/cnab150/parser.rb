@@ -11,7 +11,7 @@ module Cnab150
     end
 
     def to_hash(keys)
-      Hash[keys.zip(to_a)]
+      Hash[keys.zip(to_a.map {|e| e = e.strip})]
     end
 
     def to_a
