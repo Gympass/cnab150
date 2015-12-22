@@ -13,7 +13,7 @@ module Cnab150
     registries.each do |registry|
       line = String.new
       type = registry[:registry_code]
-      mapping = Cnab150::Layout.const_get(type.upcase).mapping
+      mapping = Cnab150::Layout.build(registry[:registry_code]).mapping
 
       registry.each do |key, value|
         value_to_complete = value.is_a?(Numeric) ? '0' : ' '
@@ -36,15 +36,18 @@ module Cnab150
     Cnab150::Registry.new(registry, type)
   end
 
-  def self.header(registries)
+  def self.header(registries, force=false)
+    registries = parse_registries(registries) if force
     find(registries, 'A')
   end
 
-  def self.trailer(registries)
+  def self.trailer(registries, force=false)
+    registries = parse_registries(registries) if force
     find(registries, 'Z')
   end
 
-  def self.details(registries)
+  def self.details(registries, force=false)
+    registries = parse_registries(registries) if force
     registries.select do |r|
       !(r.registry_code.eql?('A') || r.registry_code.eql?('Z'))
     end

@@ -9,7 +9,7 @@ module Cnab150
     end
 
     def to_hash
-      @_r ||= values.to_hash(@registry.keys)
+      @_r ||= values.to_hash(@registry.mapping.keys)
     end
 
     def raw

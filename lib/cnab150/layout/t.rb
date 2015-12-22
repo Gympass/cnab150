@@ -3,20 +3,12 @@ module Cnab150
     # Layout of Register T
     # Return of collections identified by barcode
     class T
-      def keys
-        [ 
-          :registry_code,
-          :total_registries,
-          :total_value_registries,
-          :filler
-       ]
-      end
 
       def layout
         'A' + [1, 6, 17, 126].join('A')
       end
 
-      def self.mapping
+      def mapping
         {
           registry_code: 1,
           total_registries: 6,
