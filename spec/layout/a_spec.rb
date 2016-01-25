@@ -4,7 +4,7 @@ describe Cnab150::Layout::A do
   context '.keys' do
     it do
       expect(subject.keys)
-        .to match_array [:record_code, :registry_type,
+        .to match_array [:record_code, :record_type,
                          :agreement,     :organization,
                          :bank_code,     :bank_name,
                          :file_date,     :file_number,

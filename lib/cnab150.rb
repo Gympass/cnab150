@@ -1,5 +1,5 @@
 require 'cnab150/version'
-require 'cnab150/registry'
+require 'cnab150/record'
 require 'cnab150/parser'
 require 'cnab150/layout'
 require 'cnab150/errors'
@@ -7,15 +7,15 @@ require 'cnab150/errors'
 # The public interface of gem
 module Cnab150
 
-  def self.registries(registries)
+  def self.records(records)
     file = Array.new
 
-    registries.each do |registry|
+    records.each do |record|
       line = String.new
-      type = registry[:record_code]
-      mapping = Cnab150::Layout.build(registry[:record_code]).mapping
+      type = record[:record_code]
+      mapping = Cnab150::Layout.build(record[:record_code]).mapping
 
-      registry.each do |key, value|
+      record.each do |key, value|
         value_to_complete = value.is_a?(Numeric) ? '0' : ' '
         line += value.to_s[0..(mapping[key]-1)].rjust(mapping[key], value_to_complete)
       end
@@ -25,51 +25,51 @@ module Cnab150
     file
   end
 
-  def self.parse_registries(registries)
-    registries.each_with_object([]) do |r, a|
-      a << parse_registry(r)
+  def self.parse_records(records)
+    records.each_with_object([]) do |r, a|
+      a << parse_record(r)
     end
   end
 
-  def self.parse_registry(registry)
-    type = Cnab150::Layout.build(registry.chars.first)
-    Cnab150::Registry.new(registry, type)
+  def self.parse_record(record)
+    type = Cnab150::Layout.build(record.chars.first)
+    Cnab150::Record.new(record, type)
   end
 
-  def self.header(registries, force=false)
-    registries = parse_registries(registries) if force
-    find(registries, 'A')
+  def self.header(records, force=false)
+    records = parse_records(records) if force
+    find(records, 'A')
   end
 
-  def self.trailer(registries, force=false)
-    registries = parse_registries(registries) if force
-    find(registries, 'Z')
+  def self.trailer(records, force=false)
+    records = parse_records(records) if force
+    find(records, 'Z')
   end
 
-  def self.details(registries, force=false)
-    registries = parse_registries(registries) if force
-    registries.select do |r|
+  def self.details(records, force=false)
+    records = parse_records(records) if force
+    records.select do |r|
       !(r.record_code.eql?('A') || r.record_code.eql?('Z'))
     end
   end
 
   def self.select(type, raw)
-    registries = parse_registries(raw)
-    registries.select do |r|
+    records = parse_records(raw)
+    records.select do |r|
       r.record_code.eql?(type.to_s.upcase)
     end
   end
 
-  def self.find(registries, type)
-    registries.find { |r| r.record_code.eql?(type) }
+  def self.find(records, type)
+    records.find { |r| r.record_code.eql?(type) }
   end
 
-  def self.save_to_file(filename, registries)
-    File.open(filename, 'w'){|f| f.write(string(registries))}
+  def self.save_to_file(filename, records)
+    File.open(filename, 'w'){|f| f.write(string(records))}
   end
 
-  def self.string(registries)
-    registries.join("\r\n") << "\r\n"
+  def self.string(records)
+    records.join("\r\n") << "\r\n"
   end
 
 end

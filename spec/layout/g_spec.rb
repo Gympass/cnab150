@@ -7,7 +7,7 @@ describe Cnab150::Layout::G do
         .to match_array [:account,       :agency,          :authentication,
                          :barcode,       :channel,         :credit_date,
                          :filler,        :payment_date,    :payment_type,
-                         :record_code, :registry_number,
+                         :record_code, :record_number,
                          :service_value, :value]
     end
   end

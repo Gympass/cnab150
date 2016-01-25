@@ -9,7 +9,7 @@ module Cnab150
           record_code: 1,
           NSA: 6,
           generation_date: 8,
-          total_registries: 6,
+          total_records: 6,
           total_value: 17,
           processing_date: 8,
           filler: 104

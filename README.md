@@ -5,7 +5,7 @@ Criando todos os tipos possíveis de registro, de A a Z.
 > data = [
 {
   record_code: 'A',
-  registry_type: 1,
+  record_type: 1,
   agreement: Secrets::SANTANDER_AGREEMENT,
   organization: 'Empresa XXXXXX',
   bank_code: 033,
@@ -93,7 +93,7 @@ Criando todos os tipos possíveis de registro, de A a Z.
   record_code: 'J',
   NSA: 123654,
   generation_date: 20151203,
-  total_registries: 26,
+  total_records: 26,
   total_value: 999999971,
   processing_date: 20151203,
   filler: ''
@@ -108,8 +108,8 @@ Criando todos os tipos possíveis de registro, de A a Z.
 },
 {
   record_code: 'T',
-  total_registries: 6,
-  total_value_registries: 99999971,
+  total_records: 6,
+  total_value_records: 99999971,
   filler: ''
 },
 {
@@ -132,7 +132,7 @@ Criando todos os tipos possíveis de registro, de A a Z.
   filler: ''
 }
 
-> lines = Cnab150.registries(data)
+> lines = Cnab150.records(data)
 
 Resultado em array
 
@@ -177,32 +177,32 @@ Z00000400000000001533612
 >                   'G982300210019        20151015201510168169000000023012477201510310201200230228200100000000230100000803120001183477   2                                 ',
 >                   'Z00000400000000001533612                                                                                                                              ']
 
-> registries = Cnab150.parse_registries(string_cnab150)
+> records = Cnab150.parse_records(string_cnab150)
 
-> h = Cnab150.header(registries)
+> h = Cnab150.header(records)
 
 > h.to_hash
- => {record_code: 'A', registry_type: '2', agreement: '0000111111111', organization: 'PREF MUN XXXXXX-XYZ', bank_code: '341', bank_name: 'BANCO ITAU S.A.', file_date: '20151016', file_number: '001312', version: '03', service: '', filler: ''}
+ => {record_code: 'A', record_type: '2', agreement: '0000111111111', organization: 'PREF MUN XXXXXX-XYZ', bank_code: '341', bank_name: 'BANCO ITAU S.A.', file_date: '20151016', file_number: '001312', version: '03', service: '', filler: ''}
 
 > h.record_code
  => 'A'
 
-> h.registry_type
+> h.record_type
  => '2'
 
 > cnabs.to_hash
 #=> [
-#      { record_code: 'A', registry_type: '2', agreement: '0000111111111', organization: 'PREF MUN XXXXXX-XYZ', bank_code: '341', bank_name: 'BANCO ITAU S.A.', file_date: '20151016', file_number: '001312', version: '03', service: '', filler: '' },
-#      { record_code: 'G', account: '982300210019', payment_date: '20151015', credit_date: '20151016', barcode: '81660000000050924772015101600000000000000075', value: '000000000509', service_value: '0000080', registry_number: '31200007', agency: '0159', channel: '4', authentication: '   2', payment_type: '', filler: '' },
-#      { record_code: 'G', account: '982300210019', payment_date: '20151015', credit_date: '20151016', barcode: '81690000000230124772015103102012002302282001', value: '000000002301', service_value: '0000080', registry_number: '31200011', agency: '8347', channel: '7', authentication: '   2', payment_type: '', filler: '' },
+#      { record_code: 'A', record_type: '2', agreement: '0000111111111', organization: 'PREF MUN XXXXXX-XYZ', bank_code: '341', bank_name: 'BANCO ITAU S.A.', file_date: '20151016', file_number: '001312', version: '03', service: '', filler: '' },
+#      { record_code: 'G', account: '982300210019', payment_date: '20151015', credit_date: '20151016', barcode: '81660000000050924772015101600000000000000075', value: '000000000509', service_value: '0000080', record_number: '31200007', agency: '0159', channel: '4', authentication: '   2', payment_type: '', filler: '' },
+#      { record_code: 'G', account: '982300210019', payment_date: '20151015', credit_date: '20151016', barcode: '81690000000230124772015103102012002302282001', value: '000000002301', service_value: '0000080', record_number: '31200011', agency: '8347', channel: '7', authentication: '   2', payment_type: '', filler: '' },
 #      { record_code: 'Z', rows: '000004', total: '00000000001533612', filler: '                                                                                                                              ' }
 #   ]
 
 
-> registries = Cnab150.select(:g, string_cnab150)
+> records = Cnab150.select(:g, string_cnab150)
 #=> [
-#      { record_code: 'G', account: '982300210019', payment_date: '20151015', credit_date: '20151016', barcode: '81660000000050924772015101600000000000000075', value: '000000000509', service_value: '0000080', registry_number: '31200007', agency: '0159', channel: '4', authentication: '   2', payment_type: '', filler: '' },
-#      { record_code: 'G', account: '982300210019', payment_date: '20151015', credit_date: '20151016', barcode: '81690000000230124772015103102012002302282001', value: '000000002301', service_value: '0000080', registry_number: '31200011', agency: '8347', channel: '7', authentication: '   2', payment_type: '', filler: '' },
+#      { record_code: 'G', account: '982300210019', payment_date: '20151015', credit_date: '20151016', barcode: '81660000000050924772015101600000000000000075', value: '000000000509', service_value: '0000080', record_number: '31200007', agency: '0159', channel: '4', authentication: '   2', payment_type: '', filler: '' },
+#      { record_code: 'G', account: '982300210019', payment_date: '20151015', credit_date: '20151016', barcode: '81690000000230124772015103102012002302282001', value: '000000002301', service_value: '0000080', record_number: '31200011', agency: '8347', channel: '7', authentication: '   2', payment_type: '', filler: '' },
 #   ]
 
 

@@ -5,10 +5,10 @@ describe Cnab150 do
     expect(Cnab150::VERSION).not_to be nil
   end
 
-  describe '#parse_registry' do
-    subject { described_class.parse_registry(line).to_hash }
+  describe '#parse_record' do
+    subject { described_class.parse_record(line).to_hash }
 
-    context 'when the registry is a' do
+    context 'when the record is a' do
       context 'HEADER' do
         let(:line) do
           'A20000111111111       PREF MUN XXXXXX-XYZ 341BANCO ITAU S.A.     ' \
@@ -18,7 +18,7 @@ describe Cnab150 do
 
         context 'should return a hash with' do
           it { is_expected.to include(record_code: 'A') }
-          it { is_expected.to include(registry_type: '2') }
+          it { is_expected.to include(record_type: '2') }
           it { is_expected.to include(agreement: '0000111111111') }
           it { is_expected.to include(organization: 'PREF MUN XXXXXX-XYZ') }
           it { is_expected.to include(bank_code: '341') }
@@ -78,7 +78,7 @@ describe Cnab150 do
         it { is_expected.to include(barcode: barcode) }
         it { is_expected.to include(value: '000000000509') }
         it { is_expected.to include(service_value: '0000080') }
-        it { is_expected.to include(registry_number: '31200007') }
+        it { is_expected.to include(record_number: '31200007') }
 
         it { is_expected.to include(agency: '0159') }
         it { is_expected.to include(channel: '4') }
@@ -90,8 +90,8 @@ describe Cnab150 do
     end
   end
 
-  context '#parse_registries' do
-    subject { described_class.parse_registries(lines) }
+  context '#parse_records' do
+    subject { described_class.parse_records(lines) }
 
     let(:lines) do
       [
@@ -128,7 +128,7 @@ describe Cnab150 do
   end
 
   context 'getters' do
-    let(:registries) do
+    let(:records) do
       [
         double(record_code: 'A'), double(record_code: 'G', row: 1),
         double(record_code: 'G', row: 2), double(record_code: 'Z')
@@ -136,22 +136,22 @@ describe Cnab150 do
     end
 
     context '#header' do
-      subject { described_class.header(registries) }
+      subject { described_class.header(records) }
 
       it { expect(subject.record_code).to be_eql('A') }
     end
 
     context '#details' do
-      subject { described_class.details(registries) }
+      subject { described_class.details(records) }
 
-      it 'return details registries' do
+      it 'return details records' do
         is_expected
           .to satisfy { |d| d.all? { |r| r.record_code.eql?('G') } }
       end
     end
 
     context '#trailer' do
-      subject { described_class.trailer(registries) }
+      subject { described_class.trailer(records) }
 
       it { expect(subject.record_code).to be_eql('Z') }
     end

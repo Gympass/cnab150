@@ -1,15 +1,15 @@
 module Cnab150
-  # The Regisry class is responsible to transform the string into a object
+  # The Record class is responsible to transform the string into a object
   # and is the public interface.
-  class Registry
-    def initialize(line, registry, parse = Cnab150::Parser)
+  class Record
+    def initialize(line, record, parse = Cnab150::Parser)
       @line = line
-      @registry = registry
+      @record = record
       @parse = parse
     end
 
     def to_hash
-      @_r ||= values.to_hash(@registry.mapping.keys)
+      @_r ||= values.to_hash(@record.mapping.keys)
     end
 
     def raw
@@ -19,7 +19,7 @@ module Cnab150
     private
 
     def values
-      @_v ||= @parse.build(@line, @registry.layout)
+      @_v ||= @parse.build(@line, @record.layout)
     end
 
     def method_missing(method)
