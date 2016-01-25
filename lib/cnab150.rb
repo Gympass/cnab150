@@ -1,8 +1,8 @@
-require File.dirname(__FILE__) + '/cnab150/version'
-require File.dirname(__FILE__) + '/cnab150/record'
-require File.dirname(__FILE__) + '/cnab150/parser'
-require File.dirname(__FILE__) + '/cnab150/layout'
-require File.dirname(__FILE__) + '/cnab150/errors'
+require 'cnab150/version'
+require 'cnab150/registry'
+require 'cnab150/parser'
+require 'cnab150/layout'
+require 'cnab150/errors'
 
 # The public interface of gem
 module Cnab150
