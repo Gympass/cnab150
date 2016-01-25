@@ -10,7 +10,7 @@ module Cnab150
           branch_number: 4,
           branch_name: 30,
           branch_address: 30,
-          branch_number: 5,
+          branch_address_number: 5,
           branch_cep_prefix: 5,
           branch_cep_sufix: 3,
           city: 20,
