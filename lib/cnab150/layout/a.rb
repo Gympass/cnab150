@@ -1,17 +1,12 @@
 module Cnab150
   module Layout
     # Layout of Register A
-    # This is a HEADER registry type
-    class A
-
-      def layout
-        mapping.values.map{|v| 'A' + v}.join
-      end
-
+    # This is a HEADER record type
+    class A < Base
       def mapping
         {
-          registry_code: 1,
-          registry_type: 1,
+          record_code: 1,
+          record_type: 1,
           agreement: 20,
           organization: 20,
           bank_code: 3,

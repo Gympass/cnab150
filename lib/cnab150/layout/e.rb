@@ -2,15 +2,11 @@ module Cnab150
   module Layout
     # Layout of Register E
     # Return of collections identified by barcode
-    class E
-
-      def layout
-        self.mapping.values.map{|v| 'A' + v}.join
-      end
+    class E < Base
 
       def mapping
         {
-          registry_code: 1,
+          record_code: 1,
           person_id: 25,
           branch_number: 4,
           account_number: 14,

@@ -2,15 +2,11 @@ module Cnab150
   module Layout
     # Layout of Register L
     # Return of collections identified by barcode
-    class L
-
-      def layout
-        'A' + [1, 8, 8, 8, 8, 117].join('A')
-      end
+    class L < Base
 
       def mapping
         {
-          registry_code: 1,
+          record_code: 1,
           billing_date: 8,
           due_date: 8,
           shipping_date: 8,
