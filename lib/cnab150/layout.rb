@@ -1,4 +1,4 @@
-Dir[File.dirname(__FILE__) + '/layout/*.rb'].each { |file| require file }
+Dir[File.dirname(__FILE__) + './layout/*.rb'].each { |file| require file }
 
 module Cnab150
   # The Layout module is responsible of build the appropriate layout.
