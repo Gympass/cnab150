@@ -16,8 +16,13 @@ module Cnab150
       mapping = Cnab150::Layout.build(record[:record_code]).mapping
 
       record.each do |key, value|
-        value_to_complete = value.is_a?(Numeric) ? '0' : ' '
-        line += value.to_s[0..(mapping[key]-1)].rjust(mapping[key], value_to_complete)
+        is_numeric = value.is_a?(Numeric)
+        value = value.to_s[0..(mapping[key]-1)]
+        if is_numeric
+          line += value.rjust(mapping[key], '0')
+        else
+          line += value.ljust(mapping[key], ' ')
+        end
       end
 
       file << line
