@@ -3,24 +3,12 @@ module Cnab150
     # Layout of Register I
     # Return of collections identified by barcode
     class I
-      def keys
-        [ 
-          :registry_code,
-          :person_id,
-          :document_type,
-          :document_number,
-          :name,
-          :city,
-          :state,
-          :filler
-       ]
-      end
 
       def layout
         'A' + [1, 25, 1, 14, 40, 30, 2, 37].join('A')
       end
 
-      def self.mapping
+      def mapping
         {
           registry_code: 1,
           person_id: 25,

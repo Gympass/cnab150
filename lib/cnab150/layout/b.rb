@@ -3,23 +3,12 @@ module Cnab150
     # Layout of Register B
     # This is a HEADER registry type
     class B
-      def keys
-        [
-          :registry_code,
-          :person_id,
-          :agency,
-          :account_number,
-          :due_date,
-          :filler,
-          :movement_code
-        ]
-      end
 
       def layout
         'A' + [1, 25, 4, 14, 8, 97, 1].join('A')
       end
 
-      def self.mapping
+      def mapping
         {
           registry_code: 1,
           person_id: 25,
