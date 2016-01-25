@@ -12,8 +12,8 @@ module Cnab150
 
     registries.each do |registry|
       line = String.new
-      type = registry[:registry_code]
-      mapping = Cnab150::Layout.build(registry[:registry_code]).mapping
+      type = registry[:record_code]
+      mapping = Cnab150::Layout.build(registry[:record_code]).mapping
 
       registry.each do |key, value|
         value_to_complete = value.is_a?(Numeric) ? '0' : ' '
@@ -49,19 +49,19 @@ module Cnab150
   def self.details(registries, force=false)
     registries = parse_registries(registries) if force
     registries.select do |r|
-      !(r.registry_code.eql?('A') || r.registry_code.eql?('Z'))
+      !(r.record_code.eql?('A') || r.record_code.eql?('Z'))
     end
   end
 
   def self.select(type, raw)
     registries = parse_registries(raw)
     registries.select do |r|
-      r.registry_code.eql?(type.to_s.upcase)
+      r.record_code.eql?(type.to_s.upcase)
     end
   end
 
   def self.find(registries, type)
-    registries.find { |r| r.registry_code.eql?(type) }
+    registries.find { |r| r.record_code.eql?(type) }
   end
 
   def self.save_to_file(filename, registries)

@@ -17,7 +17,7 @@ describe Cnab150 do
         end
 
         context 'should return a hash with' do
-          it { is_expected.to include(registry_code: 'A') }
+          it { is_expected.to include(record_code: 'A') }
           it { is_expected.to include(registry_type: '2') }
           it { is_expected.to include(agreement: '0000111111111') }
           it { is_expected.to include(organization: 'PREF MUN XXXXXX-XYZ') }
@@ -48,7 +48,7 @@ describe Cnab150 do
             '                                                              Y'
           end
 
-          it { is_expected.to include(registry_code: 'Z') }
+          it { is_expected.to include(record_code: 'Z') }
           it { is_expected.to include(rows: '000004') }
           it { is_expected.to include(total: '00000000001533612') }
           it do
@@ -70,7 +70,7 @@ describe Cnab150 do
       end
 
       context 'should return a hash with' do
-        it { is_expected.to include(registry_code: 'G') }
+        it { is_expected.to include(record_code: 'G') }
         it { is_expected.to include(account: '982300210019') }
         it { is_expected.to include(payment_date: '20151015') }
         it { is_expected.to include(credit_date: '20151016') }
@@ -130,15 +130,15 @@ describe Cnab150 do
   context 'getters' do
     let(:registries) do
       [
-        double(registry_code: 'A'), double(registry_code: 'G', row: 1),
-        double(registry_code: 'G', row: 2), double(registry_code: 'Z')
+        double(record_code: 'A'), double(record_code: 'G', row: 1),
+        double(record_code: 'G', row: 2), double(record_code: 'Z')
       ]
     end
 
     context '#header' do
       subject { described_class.header(registries) }
 
-      it { expect(subject.registry_code).to be_eql('A') }
+      it { expect(subject.record_code).to be_eql('A') }
     end
 
     context '#details' do
@@ -146,14 +146,14 @@ describe Cnab150 do
 
       it 'return details registries' do
         is_expected
-          .to satisfy { |d| d.all? { |r| r.registry_code.eql?('G') } }
+          .to satisfy { |d| d.all? { |r| r.record_code.eql?('G') } }
       end
     end
 
     context '#trailer' do
       subject { described_class.trailer(registries) }
 
-      it { expect(subject.registry_code).to be_eql('Z') }
+      it { expect(subject.record_code).to be_eql('Z') }
     end
   end
 end
