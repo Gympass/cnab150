@@ -5,7 +5,7 @@ module Cnab150
     class B
 
       def layout
-        'A' + [1, 25, 4, 14, 8, 97, 1].join('A')
+        mapping.values.map{|v| 'A' + v}.join
       end
 
       def mapping
