@@ -5,14 +5,14 @@ module Cnab150
     class E
 
       def layout
-        'A' + [1, 25, 4, 14, 8, 15, 2, 60, 20, 1].join('A')
+        self.mapping.values.map{|v| 'A' + v}.join
       end
 
       def mapping
         {
           registry_code: 1,
           person_id: 25,
-          agency: 4,
+          branch_number: 4,
           account_number: 14,
           due_date: 8,
           total_value: 15,
