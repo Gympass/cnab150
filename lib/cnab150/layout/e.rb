@@ -15,8 +15,8 @@ module Cnab150
           currency_code: 2,
           token: 60,
           cnpj_or_cpf_type: 1,
-          cnpj_or_cpf: 14,
-          filler: 5,
+          cnpj_or_cpf: 15,
+          filler: 4,
           movement_code: 1
         }
       end
